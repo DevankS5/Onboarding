@@ -3,6 +3,9 @@ import dbConnect from '@/lib/mongodb';
 import { OnboardingModel } from '@/lib/models/Onboarding';
 import { onboardingSchema } from '@/lib/validations/onboardingSchema';
 
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+
 function normalizeDate(value?: string) {
   if (!value) return null;
   const parsed = new Date(value);
