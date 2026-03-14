@@ -20,3 +20,7 @@ pnpm-debug.log*
 
 # misc
 .DS_Store
+
+MONGODB_SETUP_AND_OPERATIONS.md
+a.md
+b.md
