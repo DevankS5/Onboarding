@@ -81,6 +81,7 @@ export function FormWizard() {
     handleSubmit,
     trigger,
     setError,
+    setFocus,
     formState: { isSubmitting }
   } = form;
 
@@ -118,10 +119,22 @@ export function FormWizard() {
 
     const stepKey = stepKeys[step - 1];
     const fields = [...stepFieldMap[stepKey]] as Array<keyof OnboardingFormValues>;
-    const valid = await trigger(fields);
+    const valid = await trigger(fields, { shouldFocus: true });
 
     if (!valid) {
-      toast.error('Please resolve highlighted fields before proceeding.');
+      const firstErroredField = fields.find((fieldName) => {
+        const state = form.getFieldState(fieldName);
+        return Boolean(state.error);
+      });
+
+      if (firstErroredField) {
+        setFocus(firstErroredField);
+        const state = form.getFieldState(firstErroredField);
+        toast.error(state.error?.message || 'Please resolve highlighted fields before proceeding.');
+      } else {
+        toast.error('Please resolve highlighted fields before proceeding.');
+      }
+
       return;
     }
 

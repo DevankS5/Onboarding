@@ -2,6 +2,7 @@ import { z } from 'zod';
 
 const requiredText = (message: string) => z.string().trim().min(1, message);
 const optionalText = z.string().trim().optional().or(z.literal(''));
+const websiteRegex = /^(https?:\/\/)?([\w-]+\.)+[\w-]{2,}(\/[\S]*)?$/i;
 
 const phoneRegex = /^\+?[0-9\s\-()]{7,20}$/;
 
@@ -17,7 +18,12 @@ export const onboardingSchema = z
     businessType: requiredText('Business type is required'),
     businessTypeOther: optionalText,
     businessAddress: requiredText('Business address is required'),
-    websiteLink: z.union([z.literal(''), z.string().trim().url('Enter a valid URL')]).optional().default(''),
+    websiteLink: z
+      .string()
+      .trim()
+      .optional()
+      .default('')
+      .refine((value) => value.length === 0 || websiteRegex.test(value), 'Enter a valid website or social link'),
     businessDescription: requiredText('Business description is required'),
     productService: requiredText('Product/service details are required'),
     productType: requiredText('Product type is required'),
