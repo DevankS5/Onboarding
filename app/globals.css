@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-primary: #000000;
+  --bg-section: #0a0a0a;
+  --bg-card: #111111;
+  --bg-alt-card: #141414;
+  --border: #2a2a2a;
+  --gold: #f5b82e;
+  --gold-hover: #e6a91f;
+  --gold-highlight: #ffc83d;
+  --text-primary: #ffffff;
+  --text-secondary: #a1a1a1;
+  --text-muted: #6b6b6b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  background: radial-gradient(circle at 10% 0%, rgba(245, 184, 46, 0.1), transparent 40%),
+    radial-gradient(circle at 90% 20%, rgba(245, 184, 46, 0.06), transparent 35%), var(--bg-primary);
+  color: var(--text-primary);
+}
+
+input,
+textarea,
+select,
+button {
+  font: inherit;
+}
+
+.gold-focus {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.gold-focus:focus-visible {
+  border-color: var(--gold);
+  box-shadow: 0 0 10px rgba(245, 184, 46, 0.15);
+  outline: none;
+}
+
+.hide-number-spin::-webkit-outer-spin-button,
+.hide-number-spin::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
